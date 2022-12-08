@@ -7,7 +7,7 @@ import (
 	yaml "gopkg.in/yaml.v1"
 )
 
-//GetConfig reads the config file, parses it whether it be in json or yaml and returns a handler config
+// GetConfig reads the config file, parses it whether it be in json or yaml and returns a handler config
 func GetConfig(config string) (HandlerConfig, error) {
 
 	var handlerConf HandlerConfig
