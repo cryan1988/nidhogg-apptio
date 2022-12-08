@@ -8,6 +8,13 @@ Nidhogg annotate the node when all the required taints are removed: `nidhogg.usw
 
 Nidhogg was built using [Kubebuilder](https://github.com/kubernetes-sigs/kubebuilder)
 
+## Development setup
+
+go dep - https://golang.github.io/dep/docs/installation.html
+`export GO111MODULE=auto`
+`export GOPATH=$HOME/go`
+https://book-v1.book.kubebuilder.io/getting_started/installation_and_setup.html
+
 ## Usage
 
 Nidhogg requires a yaml/json config file to tell it what Daemonsets to watch and what nodes to act on.
