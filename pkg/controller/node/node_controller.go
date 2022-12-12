@@ -40,7 +40,7 @@ func Add(mgr manager.Manager, cfg nidhogg.HandlerConfig) error {
 
 // newReconciler returns a new reconcile.Reconciler
 func newReconciler(mgr manager.Manager, cfg nidhogg.HandlerConfig) reconcile.Reconciler {
-	return &ReconcileNode{handler: nidhogg.NewHandler(mgr.GetClient(), mgr.GetRecorder("nidhogg"), cfg), scheme: mgr.GetScheme()}
+	return &ReconcileNode{handler: nidhogg.NewHandler(mgr.GetClient(), mgr.GetEventRecorderFor("nidhogg"), cfg), scheme: mgr.GetScheme()}
 }
 
 type nodeEnqueue struct{}
@@ -56,11 +56,11 @@ func (e *nodeEnqueue) Generic(_ event.GenericEvent, _ workqueue.RateLimitingInte
 
 // Create adds the node to the queue, the node is created as NotReady and without daemonset pods
 func (e *nodeEnqueue) Create(evt event.CreateEvent, q workqueue.RateLimitingInterface) {
-	if evt.GetObjectMeta() == nil {
+	if evt.Object == nil {
 		return
 	}
 	q.Add(reconcile.Request{NamespacedName: types.NamespacedName{
-		Name: evt.Meta.GetName(),
+		Name: evt.Object.GetName(),
 	}})
 }
 

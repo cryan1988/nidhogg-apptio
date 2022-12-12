@@ -26,6 +26,7 @@ import (
 	_ "k8s.io/client-go/plugin/pkg/client/auth/gcp"
 	"sigs.k8s.io/controller-runtime/pkg/client/config"
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
+	zap "sigs.k8s.io/controller-runtime/pkg/log/zap"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/manager/signals"
 )
@@ -46,7 +47,7 @@ func main() {
 	flag.StringVar(&leaderConfigMap, "leader-configmap", "", "Name of configmap to use for leader election")
 	flag.StringVar(&leaderNamespace, "leader-namespace", "", "Namespace where leader configmap located")
 	flag.Parse()
-	logf.SetLogger(logf.ZapLogger(false))
+	logf.SetLogger(zap.New(zap.UseDevMode(false)))
 	log := logf.Log.WithName("entrypoint")
 
 	handlerConf, err := nidhogg.GetConfig(configPath)

@@ -56,7 +56,7 @@ func TestReconcile(t *testing.T) {
 	stopMgr, mgrStopped := StartTestManager(mgr, g)
 
 	defer func() {
-		close(stopMgr)
+		stopMgr.Done()
 		mgrStopped.Wait()
 	}()
 
