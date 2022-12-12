@@ -206,7 +206,7 @@ func (h *Handler) calculateTaints(instance *corev1.Node) (*corev1.Node, taintCha
 func (h *Handler) getDaemonsetPod(nodeName string, ds Daemonset) (*corev1.Pod, error) {
 	opts := client.InNamespace(ds.Namespace)
 	pods := &corev1.PodList{}
-	err := h.List(context.TODO(), opts, pods)
+	err := h.List(context.TODO(), pods, opts)
 	if err != nil {
 		return nil, err
 	}

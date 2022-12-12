@@ -71,4 +71,8 @@ require (
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
-replace gopkg.in/fsnotify.v1 v1.4.7 => github.com/fsnotify/fsnotify v1.4.7
+replace (
+	gopkg.in/fsnotify.v1 v1.4.7 => github.com/fsnotify/fsnotify v1.4.7
+	github.com/go-logr/logr v1.2.3 => github.com/go-logr/logr v0.4.0
+	k8s.io/klog/v2 v2.80.1 => k8s.io/klog/v2 v2.9.0
+)
