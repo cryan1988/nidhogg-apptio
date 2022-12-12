@@ -21,6 +21,7 @@ package apis
 
 import (
 	"k8s.io/apimachinery/pkg/runtime"
+	_ "k8s.io/code-generator"
 )
 
 // AddToSchemes may be used to add all resources defined in the project to a Scheme
