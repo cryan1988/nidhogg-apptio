@@ -56,7 +56,7 @@ func (e *nodeEnqueue) Generic(_ event.GenericEvent, _ workqueue.RateLimitingInte
 
 // Create adds the node to the queue, the node is created as NotReady and without daemonset pods
 func (e *nodeEnqueue) Create(evt event.CreateEvent, q workqueue.RateLimitingInterface) {
-	if evt.Meta == nil {
+	if evt.GetObjectMeta() == nil {
 		return
 	}
 	q.Add(reconcile.Request{NamespacedName: types.NamespacedName{
@@ -163,10 +163,10 @@ type ReconcileNode struct {
 // +kubebuilder:rbac:groups=core,resources=nodes/status,verbs=get;update;patch
 // +kubebuilder:rbac:groups=core,resources=pods,verbs=get;list;watch
 // +kubebuilder:rbac:groups=,resources=events,verbs=create;update;patch
-func (r *ReconcileNode) Reconcile(request reconcile.Request) (reconcile.Result, error) {
+func (r *ReconcileNode) Reconcile(ctx context.Context, request reconcile.Request) (reconcile.Result, error) {
 	// Fetch the Node instance
 	instance := &corev1.Node{}
-	err := r.handler.Get(context.TODO(), request.NamespacedName, instance)
+	err := r.handler.Get(ctx, request.NamespacedName, instance)
 	if err != nil {
 		if errors.IsNotFound(err) {
 			// Object not found, return.  Created objects are automatically garbage collected.
