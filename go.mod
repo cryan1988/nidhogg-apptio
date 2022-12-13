@@ -77,6 +77,8 @@ require (
 
 replace (
 	github.com/go-logr/logr v1.2.3 => github.com/go-logr/logr v0.4.0
+	github.com/googleapis/gnostic v0.5.5 => github.com/google/gnostic v0.5.7
+	github.com/googleapis/gnostic/openapiv2 v0.5.5 => github.com/google/gnostic/openapiv2 v0.5.7
 	github.com/onsi/gomega v1.19.0 => github.com/onsi/gomega v1.17.0
 	gopkg.in/fsnotify.v1 v1.4.7 => github.com/fsnotify/fsnotify v1.4.7
 	k8s.io/klog/v2 v2.80.1 => k8s.io/klog/v2 v2.9.0
