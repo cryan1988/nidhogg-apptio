@@ -29,6 +29,7 @@ import (
 	zap "sigs.k8s.io/controller-runtime/pkg/log/zap"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/manager/signals"
+	"sigs.k8s.io/controller-runtime/pkg/metrics/server"
 )
 
 var (
@@ -69,7 +70,9 @@ func main() {
 	// Create a new Cmd to provide shared dependencies and start components
 	log.Info("setting up manager")
 	mgr, err := manager.New(cfg, manager.Options{
-		MetricsBindAddress:      metricsAddr,
+		Metrics: server.Options{
+			BindAddress: metricsAddr,
+		},
 		LeaderElection:          leaderElection,
 		LeaderElectionID:        leaderConfigMap,
 		LeaderElectionNamespace: leaderNamespace,
